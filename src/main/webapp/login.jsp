@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="offset-md-3 col-md-6">
-                <form class="form-container" method="post" action="/loginController/login">
+                <form class="form-container" method="post" action="/loginController/login.action">
                     <h2>管理员-登陆</h2>
                     <div class="form-group">
                         <label for="usercode">用户名</label>

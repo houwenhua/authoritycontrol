@@ -52,4 +52,18 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <!--实现登录拦截-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.hwh.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+        <!--实现资源拦截-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.hwh.interceptor.PermissionInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
