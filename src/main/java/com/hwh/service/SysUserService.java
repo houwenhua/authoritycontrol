@@ -70,4 +70,13 @@ public class SysUserService {
         au.setPermissions(permissions);
         return au;
     }
+
+    /**
+     * 查询所有用户信息
+     * @return
+     */
+    public List<SysUser> findAllUser() {
+        List<SysUser> list = sum.findAllUser();
+        return list;
+    }
 }

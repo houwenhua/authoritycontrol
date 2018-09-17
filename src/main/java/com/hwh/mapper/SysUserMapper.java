@@ -3,6 +3,8 @@ package com.hwh.mapper;
 import com.hwh.po.SysUser;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 功能描述：
  *
@@ -18,4 +20,10 @@ public interface SysUserMapper {
      * @return
      */
     public SysUser findLogin(@Param("usercode") String usercode,@Param("password") String password);
+
+    /***
+     * 查询所用用户信息
+     * @return
+     */
+    public List<SysUser> findAllUser();
 }

@@ -1,6 +1,7 @@
 package com.hwh.controller;
 
 import com.hwh.exception.CustomException;
+import com.hwh.po.SysUser;
 import com.hwh.service.SysUserService;
 import com.hwh.vo.ActiveUser;
 import org.apache.commons.logging.Log;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping("/loginController")
@@ -45,5 +47,14 @@ public class LoginController {
         session.setAttribute("activeUser",au);
         mav.setViewName("redirect:/index.jsp");
         return mav;
+    }
+
+    /**
+     * 查询显示所用用户信息
+     */
+    @RequestMapping("/queryAllUser")
+    public List<SysUser> queryAllUser() {
+        List<SysUser> list = sus.findAllUser();
+        return list;
     }
 }

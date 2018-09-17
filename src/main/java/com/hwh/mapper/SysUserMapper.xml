@@ -7,4 +7,8 @@
     <select id="findLogin" resultType="com.hwh.po.SysUser" parameterType="String">
         select * from sys_user where usercode = #{usercode} and password = #{password}
     </select>
+
+    <select id="findAllUser" resultType="com.hwh.po.SysUser">
+        select * from sys_user
+    </select>
 </mapper>
