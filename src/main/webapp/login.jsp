@@ -30,7 +30,7 @@
                         <input type="password" name="password" class="form-control" id="password" placeholder="请输入密码">
                     </div>
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberme" id="rememberme">
                         <label class="form-check-label" for="exampleCheck1">记住我</label>
                     </div>
                     <button type="submit" class="btn btn-success btn-block">登陆</button>
@@ -48,5 +48,35 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script>
+    $(function () {
+        //记住密码功能
+        var str = getCookie("loginInfo");
+        str = str.substring(1,str.length-1);
+        var usercode = str.split(",")[0];
+        var password = str.split(",")[1];
+        $("#usercode").val(usercode);
+        $("#password").val(password);
+        if( str != null && str != "") {
+           $("input[type='checkbox']").attr("checked", true);
+        }
+    })
+    //获取cookie
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');//loginInfo="lisi,123456"
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+
+            while (c.charAt(0)==' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) != -1){
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+</script>
 </body>
 </html>

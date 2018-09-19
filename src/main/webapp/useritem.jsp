@@ -315,6 +315,7 @@
 
 
 
+        /*实现装载数据*/
         jQuery(grid_selector).jqGrid({
             //direction: "rtl",
 
