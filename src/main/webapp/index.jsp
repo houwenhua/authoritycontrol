@@ -61,7 +61,7 @@
     <div class="navbar-container ace-save-state" id="navbar-container">
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="index.jsp" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     商店管理系统
@@ -128,7 +128,7 @@
         <!--左侧菜单栏-->
         <ul class="nav nav-list">
             <li class="active">
-                <a href="index.html">
+                <a href="index.jsp">
                     <i class="menu-icon fa fa-tachometer"></i>
                     <span class="menu-text"> 仪表板 </span>
                 </a>
@@ -139,7 +139,7 @@
             <%--自增的导航目录--%>
             <c:forEach items="${activeUser.menus}" var="key">
                 <li>
-                    <a href="error.jsp">
+                    <a href="useritem.jsp">
                         <i class="menu-icon fa fa-list-alt"></i>
                         <span class="menu-text">${key.name}</span>
                     </a>

@@ -16,9 +16,9 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>用户信息</title>
+    <title>jqGrid - Ace Admin</title>
 
-    <meta name="description" content="overview &amp; stats" />
+    <meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
     <!-- bootstrap & fontawesome -->
@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
     <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css" />
 
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
@@ -61,7 +64,7 @@
     <div class="navbar-container ace-save-state" id="navbar-container">
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="index.jsp" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     商店管理系统
@@ -320,36 +323,16 @@
             //direction: "rtl",
 
             //subgrid options
-            subGrid : true,
+            subGrid : false,
             //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
             //datatype: "xml",
-            subGridOptions : {
-                plusicon : "ace-icon fa fa-plus center bigger-110 blue",
-                minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
-                openicon : "ace-icon fa fa-chevron-right center orange"
-            },
-            //for this example we are using local data
-            subGridRowExpanded: function (subgridDivId, rowId) {
-                var subgridTableId = subgridDivId + "_t";
-                $("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
-                $("#" + subgridTableId).jqGrid({
-                    datatype: 'local',
-                    data: subgrid_data,
-                    colNames: ['No','Item Name','Qty'],
-                    colModel: [
-                        { name: 'id', width: 50 },
-                        { name: 'name', width: 150 },
-                        { name: 'qty', width: 50 }
-                    ]
-                });
-            },
 
 
-
-            data: grid_data,
-            datatype: "local",
+            url:"/loginController/queryAllUser.action",
+            //data: grid_data,
+            datatype: "json",
             height: 250,
-            colNames:[' ', 'ID','Last Sales','Name', 'Stock', 'Ship via','Notes'],
+            colNames:[' ', 'ID','登录名','用户名', '密码', '盐巴','是否锁定'],
             colModel:[
                 {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
                     formatter:'actions',
@@ -361,12 +344,12 @@
                         //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     }
                 },
-                {name:'id',index:'id', width:60, sorttype:"int", editable: true},
-                {name:'sdate',index:'sdate',width:90, editable:true, sorttype:"date",unformat: pickDate},
-                {name:'name',index:'name', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}},
-                {name:'stock',index:'stock', width:70, editable: true,edittype:"checkbox",editoptions: {value:"Yes:No"},unformat: aceSwitch},
-                {name:'ship',index:'ship', width:90, editable: true,edittype:"select",editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
-                {name:'note',index:'note', width:150, sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"10"}}
+                {name:'id',index:'id', width:30, sorttype:"int", editable: true},
+                {name:'usercode',index:'usercode',width:30, editable:true, sorttype:"date",unformat: pickDate},
+                {name:'username',index:'username', width:50,editable: true,editoptions:{size:"20",maxlength:"30"}},
+                {name:'password',index:'password', width:150, editable: true,edittype:"checkbox",editoptions: {value:"Yes:No"},unformat: aceSwitch},
+                {name:'salt',index:'salt', width:150, editable: true,edittype:"select",editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
+                {name:'locked',index:'locked', width:30, sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"10"}}
             ],
 
             viewrecords : true,
@@ -391,8 +374,8 @@
                 }, 0);
             },
 
-            editurl: "./dummy.php",//nothing is saved
-            caption: "jqGrid with inline editing"
+            editurl: "/loginController/login.action",//nothing is saved
+            caption: "用户列表"
 
             //,autowidth: true,
 

@@ -65,6 +65,7 @@ public class LoginController {
      */
     @RequestMapping("/queryAllUser")
     public List<SysUser> queryAllUser() {
+        log.info("查询所用用户信息*************");
         List<SysUser> list = sus.findAllUser();
         return list;
     }
