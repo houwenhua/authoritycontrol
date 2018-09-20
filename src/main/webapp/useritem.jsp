@@ -131,7 +131,7 @@
         <!--左侧菜单栏-->
         <ul class="nav nav-list">
             <li class="active">
-                <a href="index.html">
+                <a href="index.jsp">
                     <i class="menu-icon fa fa-tachometer"></i>
                     <span class="menu-text"> 仪表板 </span>
                 </a>
