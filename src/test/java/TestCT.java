@@ -8,6 +8,5 @@ public class TestCT {
     //冲突测试
     public void testCT() {
         System.out.println("hello 333");
-        System.out.println("hello 222");
     }
 }
