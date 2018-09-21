@@ -7,6 +7,6 @@ public class TestCT {
 
     //冲突测试
     public void testCT() {
-        System.out.println("hello 4444");
+        System.out.println("hello 2222");
     }
 }
