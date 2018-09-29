@@ -1,0 +1,12 @@
+.nav-tabs li .closeable {
+/*     top: 65px; */
+/*     position: fixed; */
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.nav-tabs li a i:first-child{
+    margin-right: 3px;
+}
+
+

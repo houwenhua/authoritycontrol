@@ -45,6 +45,9 @@
     <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
     <![endif]-->
 
+    <link rel="stylesheet" href="css/bootstrap-tab.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+
     <!-- inline styles related to this page -->
 
     <!-- ace settings handler -->
@@ -56,6 +59,28 @@
     <script src="assets/js/html5shiv.min.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .nav-tabs li {
+            box-sizing: border-box;
+        }
+        .nav-tabs li a {
+            border-radius: 10px;
+        }
+        .tab-content {
+            border-left: 0px;
+            border-right: 0px;
+            border-bottom: 0px;
+            height: 100%;
+            padding:0px;
+        }
+        .glyphicon {
+            margin-left:3px;
+        }
+        .nav-tabs li a.glyphicon-remove-sign:hover{
+            　　color:red;
+            　　cursor: pointer;
+        }
+    </style>
 </head>
 
 <body class="no-skin">
@@ -92,11 +117,8 @@
         try{ace.settings.loadState('main-container')}catch(e){}
     </script>
 
-    <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
-        <script type="text/javascript">
-            try{ace.settings.loadState('sidebar')}catch(e){}
-        </script>
-
+    <div class="sidebar" id="sidebar">
+        <%--四个装饰按钮--%>
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
                 <button class="btn btn-success">
@@ -126,38 +148,18 @@
                 <span class="btn btn-danger"></span>
             </div>
         </div><!-- /.sidebar-shortcuts -->
-
-        <!--左侧菜单栏-->
-        <ul class="nav nav-list">
-            <li class="active">
-                <a href="index.jsp">
-                    <i class="menu-icon fa fa-tachometer"></i>
-                    <span class="menu-text"> 仪表板 </span>
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <%--自增的导航目录--%>
-            <c:forEach items="${activeUser.menus}" var="key">
-                <li>
-                    <a href="useritem.jsp">
-                        <i class="menu-icon fa fa-list-alt"></i>
-                        <span class="menu-text">${key.name}</span>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-            </c:forEach>
-
-            <%--自增的导航目录--%>
-        </ul><!-- /.nav-list -->
-
+            <%--四个装饰按钮--%>
+        <ul class="nav nav-list" id="menu"></ul>
+        <div class="sidebar-collapse" id="sidebar-collapse">
+            <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+        </div>
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
             <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
     </div>
 
-    <div class="main-content">
+
+    <%--<div class="main-content">
         <div class="main-content-inner">
             <!--导航标签-->
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -252,7 +254,24 @@
                 </div><!-- /.row -->
             </div><!-- /.page-content -->
         </div>
-    </div><!-- /.main-content -->
+    </div>--%><!-- /.main-content -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12" style="padding-left:5px;">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active">
+                            <a href="#Index" role="tab" data-toggle="tab"><span style="margin-right: 4px;" class="glyphicon glyphicon-home" aria-hidden="true"></span>首页</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="Index">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="footer">
         <div class="footer-inner">
@@ -295,6 +314,121 @@
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
+
+<script src="js/sidebar-menu.js"></script>
+<script src="js/bootstrap-tab.js" ></script>
+
+<script type="text/javascript" >
+    $(function () {
+        $('#menu').sidebarMenu({
+            data: [{
+                id: '1',
+                text: '系统设置',
+                icon: 'menu-icon fa fa-tachometer',
+                url: 'useritem.jsp',
+                menus: [{
+                    id: '11',
+                    text: '编码管理',
+                    icon: 'ace-icon fa fa-book',
+                    url: '/wecome.jsp'
+                }]
+            }, {
+                id: '2',
+                text: '基础数据',
+                icon: 'menu-icon fa fa-pencil-square-o',
+                url: '',
+                menus: [{
+                    id: '21',
+                    text: '基础特征',
+                    icon: 'icon-glass',
+                    url: '/useritem.jsp'
+                }, {
+                    id: '22',
+                    text: '特征管理',
+                    icon: 'icon-glass',
+                    url: '/BasicData/Features/Index'
+                }, {
+                    id: '23',
+                    text: '物料维护',
+                    icon: 'icon-glass',
+                    url: '/Model/Index'
+                }, {
+                    id: '24',
+                    text: '站点管理',
+                    icon: 'icon-glass',
+                    url: '/Station/Index'
+                }]
+            }, {
+                id: '3',
+                text: '权限管理',
+                icon: 'menu-icon fa fa-bookmark-o',
+                url: '',
+                menus: [{
+                    id: '31',
+                    text: '用户管理',
+                    icon: 'icon-user',
+                    url: '/SystemSetting/User'
+                }, {
+                    id: '32',
+                    text: '角色管理',
+                    icon: 'icon-apple',
+                    url: '/SystemSetting/Role'
+                }, {
+                    id: '33',
+                    text: '菜单管理',
+                    icon: 'icon-list',
+                    url: '/SystemSetting/Menu'
+                }, {
+                    id: '34',
+                    text: '部门管理',
+                    icon: 'icon-glass',
+                    url: '/SystemSetting/Department'
+                }]
+            }, {
+                id: '4',
+                text: '订单管理',
+                icon: 'icon-envelope',
+                url: '',
+                menus: [{
+                    id: '41',
+                    text: '订单查询',
+                    icon: 'icon-glass',
+                    url: '/Order/Query'
+                }, {
+                    id: '42',
+                    text: '订单排产',
+                    icon: 'icon-glass',
+                    url: '/Order/PLANTPRODUCT'
+                }, {
+                    id: '43',
+                    text: '订单撤排',
+                    icon: 'icon-glass',
+                    url: '/Order/cancelPRODUCT'
+                }, {
+                    id: '44',
+                    text: '订单HOLD',
+                    icon: 'icon-glass',
+                    url: '/Order/hold'
+                }, {
+                    id: '45',
+                    text: '订单删除',
+                    icon: 'icon-glass',
+                    url: '/Order/delete'
+                }, {
+                    id: '47',
+                    text: '订单插单',
+                    icon: 'icon-glass',
+                    url: '/Order/insertorder'
+                }, {
+                    id: '48',
+                    text: '订单导入',
+                    icon: 'icon-glass',
+                    url: '/Order/Import'
+                }]
+            }]
+        });
+    });
+</script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
