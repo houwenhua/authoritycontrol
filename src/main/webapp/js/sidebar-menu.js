@@ -115,7 +115,7 @@ var addTabs = function (options) {
 //自适应高度
 var changeFrameHeight = function (that) {
     $(that).height(document.documentElement.clientHeight - 115);
-    $(that).parent(".tab-pane").height(document.documentElement.clientHeight - 130);
+    $(that).parent(".tab-pane").height(document.documentElement.clientHeight - 190);
 }
 var closeTab = function (id) {
     //如果关闭的是当前激活的TAB，激活他的前一个TAB
